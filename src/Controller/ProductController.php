@@ -4,40 +4,45 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Repository\ProductRepository;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Services\ProductResponseFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ProductController extends AbstractController
 {
+    /**
+     * @var ProductRepository
+     */
     private $repository;
+    /**
+     * @var ProductResponseRepository
+     */
+    private $responseFactory;
 
-    public function __construct(ProductRepository $repository)
+    public function __construct(ProductRepository $repository, ProductResponseFactory $responseFactory)
     {
         $this->repository = $repository;
+        $this->responseFactory = $responseFactory;
     }
 
     /**
      * @Route("/list", name="list", methods={"GET"})
      */
-    public function index(): Response
+    public function index(): JsonResponse
     {
         $products = $this->repository->findAll();
-        dd($products);
-        return $this->json($products);
+        return $this->responseFactory->createFromProducts($products);
     }
 
     /**
      * @Route("/create", name="create", methods={"GET"})
      */
-    public function create(): Response
+    public function create(): JsonResponse
     {
         $product = new Product();
         $product->setName("Foobar");
 
         $this->repository->save($product);
-
-        return $this->json($product);
+        return $this->responseFactory->createFromProduct($product);
     }
 }
