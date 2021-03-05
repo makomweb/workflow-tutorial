@@ -47,4 +47,10 @@ class ProductRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function save(Product $product)
+    {
+        $this->_em->persist($product);
+        $this->_em->flush();
+    }
 }

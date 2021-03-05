@@ -2,20 +2,41 @@
 
 namespace App\Controller;
 
+use App\Entity\Product;
+use App\Repository\ProductRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ProductController extends AbstractController
 {
+    private $repository;
+
+    public function __construct(ProductRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
     /**
-     * @Route("/product", name="product")
+     * @Route("/list", name="list", methods={"GET"})
      */
     public function index(): Response
     {
-        return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/ProductController.php',
-        ]);
+        $products = $this->repository->findAll();
+        return $this->json($products);
+    }
+
+    /**
+     * @Route("/create", name="create", methods={"GET"})
+     */
+    public function create(): Response
+    {
+        $product = new Product();
+        $product->setName("Foobar");
+
+        $this->repository->save($product);
+
+        return $this->json($product);
     }
 }
