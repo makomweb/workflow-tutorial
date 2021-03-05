@@ -24,6 +24,7 @@ class ProductController extends AbstractController
     public function index(): Response
     {
         $products = $this->repository->findAll();
+        dd($products);
         return $this->json($products);
     }
 
