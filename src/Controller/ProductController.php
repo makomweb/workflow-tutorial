@@ -7,6 +7,7 @@ use App\Repository\ProductRepository;
 use App\Services\ProductResponseFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Routing\Annotation\Route;
 
 class ProductController extends AbstractController
 {
