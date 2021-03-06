@@ -1,2 +1,34 @@
 framework:
-    workflows: null
+    workflows:
+        product:
+            type: state_machine
+            audit_trail:
+                enabled: "%kernel.debug%"
+            marking_store:
+                type: 'method'
+                property: 'state'
+            supports:
+                - App\Entity\Product
+            initial_marking: prototyped
+            places:
+                - prototyped
+                - implemented
+                - tested
+                - wrapped
+                - shipped
+            transitions:
+                implement:
+                    from: prototyped
+                    to: implemented
+                test:
+                    from: implemented
+                    to: tested
+                wrap:
+                    from: tested
+                    to: wrapped
+                ship:
+                    from: wrapped
+                    to: shipped
+
+
+
