@@ -16,3 +16,13 @@ https://codereviewvideos.com/course/symfony-workflow-component-tutorial/video/a-
 
 - `php bin/console doctrine:database:create`
 - `php bin/console doctrine:schema:create`
+
+## Statemachine
+
+![statemachine](./diagrams/statemachine.png)
+
+## Workflow
+
+- `symfony console workflow:dump product | dot -Tpng -o workflow.png`
+
+![workflow](./workflow.png)
