@@ -102,6 +102,7 @@ class ProductController extends AbstractController
         }
 
         $this->workflow->setNext($product);
+        $this->repository->save($product);
 
         return $this->redirectToRoute('view_product', ['id' => $id]);
     }

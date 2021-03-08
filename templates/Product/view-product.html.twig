@@ -9,7 +9,7 @@
 
         <div class="mb-2 p-2 bg-white">
             <p>{{ product.name }}: {{ product.status }}</p>
-            <a href="{{ path('view_product', { 'id': product.id }) }}"
+            <a href="{{ path('next', { 'id': product.id }) }}"
                class="btn btn-outline-primary btn-sm">Next</a>
         </div>
     </div>
