@@ -53,10 +53,10 @@ class ProductController extends AbstractController
      */
     public function view() : Response
     {
-        $number = random_int(0, 100);
+        $products = $this->repository->findAll();
 
-        return $this->render('Product/view.html.twig', [
-            'number' => $number,
+        return $this->render('Product/index.html.twig', [
+            'products' => $products,
         ]);
     }
 }
