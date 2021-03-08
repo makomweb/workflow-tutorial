@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Product;
 use App\Repository\ProductRepository;
 use App\Services\ProductResponseFactory;
+use App\Services\ProductWorkflow;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,11 +21,18 @@ class ProductController extends AbstractController
      * @var ProductResponseRepository
      */
     private $responseFactory;
+    /**
+     * @var ProductWorkflow
+     */
+    private $workflow;
 
-    public function __construct(ProductRepository $repository, ProductResponseFactory $responseFactory)
+    public function __construct(ProductRepository $repository,
+                                ProductResponseFactory $responseFactory,
+                                ProductWorkflow $workflow)
     {
         $this->repository = $repository;
         $this->responseFactory = $responseFactory;
+        $this->workflow = $workflow;
     }
 
     /**
@@ -93,8 +101,7 @@ class ProductController extends AbstractController
             throw $this->createNotFoundException('No product found for id ' . $id);
         }
 
-
-        // TODO implement next
+        $this->workflow->setNext($product);
 
         return $this->redirectToRoute('view_product', ['id' => $id]);
     }
