@@ -7,6 +7,7 @@ use App\Repository\ProductRepository;
 use App\Services\ProductResponseFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ProductController extends AbstractController
@@ -45,5 +46,17 @@ class ProductController extends AbstractController
 
         $this->repository->save($product);
         return $this->responseFactory->createFromProduct($product);
+    }
+
+    /**
+     * @Route("/view", name="view", methods={"GET"})
+     */
+    public function view() : Response
+    {
+        $number = random_int(0, 100);
+
+        return $this->render('Product/view.html.twig', [
+            'number' => $number,
+        ]);
     }
 }
