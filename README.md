@@ -36,3 +36,8 @@ https://codereviewvideos.com/course/symfony-workflow-component-tutorial/video/a-
 - add 'status' property to the Product entity `php bin/console make:entity`
 - create a migration `php bin/console make:migration`
 - run the migration `php bin/console doctrine:migrations:migrate`
+
+## Sample data / load fixtures
+
+- `composer require --dev orm-fixtures`
+- `php bin/console doctrine:fixtures:load`
