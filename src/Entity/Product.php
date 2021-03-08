@@ -27,6 +27,11 @@ class Product
      */
     private $status;
 
+    public function __construct()
+    {
+        $this->status = 'prototyped';
+    }
+
     public function getId(): ?int
     {
         return $this->id;
