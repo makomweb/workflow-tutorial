@@ -74,7 +74,7 @@ class ProductController extends AbstractController
 
         return $this->render('Product/view-product.html.twig',
             [
-                'status' => 'foobar'
+                'product' => $product
             ]);
     }
 }
