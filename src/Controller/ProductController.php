@@ -59,4 +59,22 @@ class ProductController extends AbstractController
             'products' => $products,
         ]);
     }
+
+
+    /**
+     * @Route("/view-product/{id}", name="view_product", methods={"GET"})
+     */
+    public function viewProduct($id) : Response{
+
+        $product = $this->repository->find($id);
+
+        if (!$product) {
+            throw $this->createNotFoundException('No product found for id ' . $id);
+        }
+
+        return $this->render('Product/view-product.html.twig',
+            [
+                'status' => 'foobar'
+            ]);
+    }
 }
