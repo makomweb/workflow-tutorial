@@ -6,7 +6,7 @@ framework:
                 enabled: "%kernel.debug%"
             marking_store:
                 type: 'method'
-                property: 'state'
+                property: 'status'
             supports:
                 - App\Entity\Product
             initial_marking: prototyped
