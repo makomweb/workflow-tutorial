@@ -63,6 +63,8 @@ class ProductController extends AbstractController
 
     /**
      * @Route("/view-product/{id}", name="view_product", methods={"GET"})
+     * @param $id
+     * @return Response
      */
     public function viewProduct($id) : Response{
 
@@ -76,5 +78,24 @@ class ProductController extends AbstractController
             [
                 'product' => $product
             ]);
+    }
+
+    /**
+     * @Route ("/next/{id}", name="next", methods={"GET"})
+     * @param $id
+     * @return Response
+     */
+    public function next($id): Response
+    {
+        $product = $this->repository->find($id);
+
+        if (!$product) {
+            throw $this->createNotFoundException('No product found for id ' . $id);
+        }
+
+
+        // TODO implement next
+
+        return $this->redirectToRoute('view_product', ['id' => $id]);
     }
 }
