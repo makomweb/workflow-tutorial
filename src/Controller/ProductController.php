@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\DataFixtures\SampleProducts;
+use App\DecoratedProduct;
 use App\Entity\Product;
 use App\Repository\ProductRepository;
 use App\Services\JsonResponseFactory;
@@ -67,8 +68,13 @@ class ProductController extends AbstractController
     {
         $products = $this->repository->findAll();
 
+        $decorated = array_map(function($product) {
+            $nextTransition = $this->workflow->getNextTransition($product);
+            return new DecoratedProduct($product, $nextTransition);
+        }, $products);
+
         return $this->render('Product/index.html.twig', [
-            'products' => $products,
+            'products' => $decorated,
         ]);
     }
 

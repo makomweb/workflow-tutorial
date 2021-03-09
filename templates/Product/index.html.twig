@@ -24,10 +24,12 @@
                         <td>{{ product.id }}</td>
                         <td>{{ product.name }}</td>
                         <td>{{ product.status }}</td>
+                        {% if product.transition %}
                         <td>
                             <a href="{{ path('next', { 'id': product.id }) }}"
-                               class="btn btn-outline-primary btn-sm">Next</a>
+                               class="btn btn-outline-primary btn-sm">{{ product.transition }}</a>
                         </td>
+                        {% endif %}
                     </tr>
                 {% endfor %}
             </tbody>

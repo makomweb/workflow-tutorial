@@ -30,6 +30,23 @@ class ProductWorkflow
         }
     }
 
+    /**
+     * @param Product $product
+     * @return string
+     * @throws Exception
+     */
+    public function getNextTransition(Product $product): ?string
+    {
+        switch ($product->getStatus())
+        {
+            case 'prototyped': return 'implement';
+            case 'implemented': return 'test';
+            case 'tested': return 'wrap';
+            case 'wrapped': return 'ship';
+            default: return null;
+        }
+    }
+
     private function ship(Product $product)
     {
         $this->workflow->apply($product, 'ship');
