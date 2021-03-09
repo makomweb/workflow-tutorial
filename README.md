@@ -1,8 +1,22 @@
 # Symfony Workflow tutorial
 
-https://codereviewvideos.com/course/symfony-workflow-component-tutorial/video/a-simple-state-machine-example
+The following is an example application which uses the Symfony Workflow component to implement a basic statemachine.
 
-## Steps
+![gif](./diagrams/workflow.gif)
+
+## Run the app
+
+1. `git@github.com:makomweb/workflow-tutorial.git`
+2. `composer install`
+3. `php bin/console doctrine:database:create`
+4. `php bin/console doctrine:schema:create`
+5. `symfony server:start -d`
+
+Visit `http://localhost:8000/create` to initialize.
+
+The following sections are just side notes.
+
+---
 
 ## Make entity and controller
 
