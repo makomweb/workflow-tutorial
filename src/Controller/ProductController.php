@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\DataFixtures\SampleProducts;
 use App\Entity\Product;
 use App\Repository\ProductRepository;
 use App\Services\JsonResponseFactory;
@@ -47,13 +48,16 @@ class ProductController extends AbstractController
     /**
      * @Route("/create", name="create", methods={"GET"})
      */
-    public function create(): JsonResponse
+    public function create(): Response
     {
-        $product = new Product();
-        $product->setName("Foobar");
+        $products = SampleProducts::getSampleProducts();
 
-        $this->repository->save($product);
-        return $this->responseFactory->createFromObject($product);
+        foreach ($products as $product)
+        {
+            $this->repository->save($product);
+        }
+
+        return $this->redirectToRoute('view');
     }
 
     /**
@@ -104,6 +108,6 @@ class ProductController extends AbstractController
         $this->workflow->setNext($product);
         $this->repository->save($product);
 
-        return $this->redirectToRoute('view_product', ['id' => $id]);
+        return $this->redirectToRoute('view');
     }
 }

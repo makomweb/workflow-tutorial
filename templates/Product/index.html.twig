@@ -24,6 +24,10 @@
                         <td>{{ product.id }}</td>
                         <td>{{ product.name }}</td>
                         <td>{{ product.status }}</td>
+                        <td>
+                            <a href="{{ path('next', { 'id': product.id }) }}"
+                               class="btn btn-outline-primary btn-sm">Next</a>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>

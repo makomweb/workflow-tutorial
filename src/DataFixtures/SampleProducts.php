@@ -8,21 +8,36 @@ use Doctrine\Persistence\ObjectManager;
 
 class SampleProducts extends Fixture
 {
-    public function load(ObjectManager $manager)
+    public static function getSampleProducts() : array
     {
+        $array = array();
+
         {
             $product = new Product();
             $product->setName("ABC");
-            $manager->persist($product);
+            array_push($array, $product);
         }
+
         {
             $product = new Product();
             $product->setName("XYZ");
-            $manager->persist($product);
+            array_push($array, $product);
         }
+
         {
             $product = new Product();
             $product->setName("123");
+            array_push($array, $product);
+        }
+
+        return $array;
+    }
+
+    public function load(ObjectManager $manager)
+    {
+        $products = static::getSampleProducts();
+
+        foreach ($products as $product) {
             $manager->persist($product);
         }
 
