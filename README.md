@@ -2,6 +2,8 @@
 
 The following is an example application which uses the Symfony Workflow component to implement a basic statemachine.
 
+![statemachine](./diagrams/statemachine.png)
+
 ![gif](./diagrams/workflow.gif)
 
 ## Run the app
@@ -30,10 +32,6 @@ The following sections are just side notes.
 
 - `php bin/console doctrine:database:create`
 - `php bin/console doctrine:schema:create`
-
-## Add a Statemachine
-
-![statemachine](./diagrams/statemachine.png)
 
 ## Print the Workflow
 
