@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Repository\ProductRepository;
-use App\Services\ProductResponseFactory;
+use App\Services\JsonResponseFactory;
 use App\Services\ProductWorkflow;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -27,7 +27,7 @@ class ProductController extends AbstractController
     private $workflow;
 
     public function __construct(ProductRepository $repository,
-                                ProductResponseFactory $responseFactory,
+                                JsonResponseFactory $responseFactory,
                                 ProductWorkflow $workflow)
     {
         $this->repository = $repository;
@@ -41,7 +41,7 @@ class ProductController extends AbstractController
     public function index(): JsonResponse
     {
         $products = $this->repository->findAll();
-        return $this->responseFactory->createFromProducts($products);
+        return $this->responseFactory->createFromObjects($products);
     }
 
     /**
@@ -53,7 +53,7 @@ class ProductController extends AbstractController
         $product->setName("Foobar");
 
         $this->repository->save($product);
-        return $this->responseFactory->createFromProduct($product);
+        return $this->responseFactory->createFromObject($product);
     }
 
     /**
