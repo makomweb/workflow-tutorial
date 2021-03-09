@@ -1,15 +1,6 @@
 <?php
 
-/*
- * Quentic Platform
- * Copyright(c) Quentic GmbH
- * contact.de@quentic.com
- *
- * https://www.quentic.com
- */
-
 namespace App;
-
 
 use App\Entity\Product;
 
